@@ -5,12 +5,13 @@
 
 Summary:	The XCache module for PHP
 Name:		php-%{modname}
-Version:	1.2.2
-Release:	%mkrel 6
+Version:	2.0.0
+Release:	%mkrel 0.0.r592.1
 Group:		Development/PHP
 License:	BSD-like
 URL:		http://xcache.lighttpd.net/
-Source0:	http://xcache.lighttpd.net/pub/Releases/%{version}/%{modname}-%{version}.tar.gz
+#Source0:	http://xcache.lighttpd.net/pub/Releases/%{version}/%{modname}-%{version}.tar.gz
+Source0:	xcache-2.x.tar.gz
 Source1:	xcache.ini
 BuildRequires:  php-devel >= 3:5.2.0
 Conflicts:	php-afterburner php-mmcache php-eaccelerator php-apc
@@ -39,7 +40,7 @@ http://localhost/%{name}/
 
 %prep
 
-%setup -q -n %{modname}-%{version}
+%setup -q -n xcache-2.x
 
 cp %{SOURCE1} %{inifile}
 perl -pi -e "s|\@libdir\@|%{_libdir}|g" %{inifile}
