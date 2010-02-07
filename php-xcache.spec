@@ -6,7 +6,7 @@
 Summary:	The XCache module for PHP
 Name:		php-%{modname}
 Version:	1.3.0
-Release:	%mkrel 4
+Release:	%mkrel 5
 Group:		Development/PHP
 License:	BSD-like
 URL:		http://xcache.lighttpd.net/
@@ -25,17 +25,15 @@ new PHP versions.
 %package	admin
 Summary:	Web admin GUI for XCache
 Group:		Development/PHP
-Requires(pre): rpm-helper
-Requires(postun): rpm-helper
+%if %mdkversion < 201010
+Requires(post):   rpm-helper
+Requires(postun):   rpm-helper
+%endif
 Requires:	apache-mod_php
 Requires:	%{name}
 
 %description	admin
 This package contains a Web admin GUI for XCache.
-
-To access the web GUI please open up your favourite web browser and point to:
-
-http://localhost/%{name}/
 
 %prep
 
@@ -75,7 +73,8 @@ install -m0644 %{inifile} %{buildroot}%{_sysconfdir}/php.d/%{inifile}
 
 install -m0755 modules/%{soname} %{buildroot}%{_libdir}/php/extensions/%{soname}
 
-cat > %{name}.conf << EOF
+install -d -m 755 %{buildroot}%{webappconfdir}
+cat > %{buildroot}%{webappconfdir}/%{name}.conf << EOF
 Alias /%{name} /var/www/%{name}
 
 <Directory "/var/www/%{name}">
@@ -86,22 +85,18 @@ Alias /%{name} /var/www/%{name}
 </Directory>
 EOF
 
-install -m0644 %{name}.conf %{buildroot}%{_sysconfdir}/httpd/conf/webapps.d/
-
 install -m0644 admin/* %{buildroot}/var/www/%{name}/
 install -m0644 coverager/* %{buildroot}/var/www/%{name}/coverager
 
 %post
-if [ -f /var/lock/subsys/httpd ]; then
-    %{_initrddir}/httpd restart >/dev/null || :
-fi
+%if %mdkversion < 201010
+%_post_webapp
+%endif
 
 %postun
-if [ "$1" = "0" ]; then
-    if [ -f /var/lock/subsys/httpd ]; then
-	%{_initrddir}/httpd restart >/dev/null || :
-    fi
-fi
+%if %mdkversion < 201010
+%_postun_webapp
+%endif
 
 %post admin
 %_post_webapp
