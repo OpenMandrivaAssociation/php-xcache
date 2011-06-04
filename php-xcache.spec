@@ -5,8 +5,8 @@
 
 Summary:	The XCache module for PHP
 Name:		php-%{modname}
-Version:	1.3.0
-Release:	%mkrel 11
+Version:	1.3.2
+Release:	%mkrel 1
 Group:		Development/PHP
 License:	BSD-like
 URL:		http://xcache.lighttpd.net/
