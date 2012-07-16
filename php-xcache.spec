@@ -6,11 +6,11 @@
 Summary:	The XCache module for PHP
 Name:		php-%{modname}
 Version:	2.0.1
-Release:	%mkrel 0.0.rc1.1
+Release:	%mkrel 1
 Group:		Development/PHP
 License:	BSD-like
 URL:		http://xcache.lighttpd.net/
-Source0:	http://xcache.lighttpd.net/pub/Releases/%{version}/%{modname}-%{version}-rc1.tar.gz
+Source0:	http://xcache.lighttpd.net/pub/Releases/%{version}/%{modname}-%{version}.tar.gz
 Source1:	xcache.ini
 BuildRequires:  php-devel >= 3:5.2.0
 Conflicts:	php-afterburner php-mmcache php-eaccelerator php-apc
@@ -37,7 +37,7 @@ This package contains a Web admin GUI for XCache.
 
 %prep
 
-%setup -q -n %{modname}-%{version}-rc1
+%setup -q -n %{modname}-%{version}
 
 cp %{SOURCE1} %{inifile}
 perl -pi -e "s|\@libdir\@|%{_libdir}|g" %{inifile}
