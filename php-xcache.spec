@@ -6,7 +6,7 @@
 Summary:	The XCache module for PHP
 Name:		php-%{modname}
 Version:	2.0.1
-Release:	%mkrel 1
+Release:	2
 Group:		Development/PHP
 License:	BSD-like
 URL:		http://xcache.lighttpd.net/
@@ -25,10 +25,6 @@ new PHP versions.
 %package	admin
 Summary:	Web admin GUI for XCache
 Group:		Development/PHP
-%if %mdkversion < 201010
-Requires(post):   rpm-helper
-Requires(postun):   rpm-helper
-%endif
 Requires:	apache-mod_php
 Requires:	%{name}
 
@@ -62,7 +58,6 @@ phpize
 %make
 
 %install
-rm -rf %{buildroot}
 
 install -d %{buildroot}%{_libdir}/php/extensions
 install -d %{buildroot}%{_sysconfdir}/php.d
@@ -88,24 +83,6 @@ EOF
 install -m0644 admin/* %{buildroot}/var/www/%{name}/
 install -m0644 coverager/* %{buildroot}/var/www/%{name}/coverager
 
-%post
-%if %mdkversion < 201010
-%_post_webapp
-%endif
-
-%postun
-%if %mdkversion < 201010
-%_postun_webapp
-%endif
-
-%post admin
-%_post_webapp
-
-%postun admin
-%_postun_webapp
-
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
