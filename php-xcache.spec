@@ -6,7 +6,7 @@
 Summary:	The XCache module for PHP
 Name:		php-%{modname}
 Version:	2.0.1
-Release:	4
+Release:	5
 Group:		Development/PHP
 License:	BSD-like
 URL:		http://xcache.lighttpd.net/
@@ -68,8 +68,8 @@ install -m0644 %{inifile} %{buildroot}%{_sysconfdir}/php.d/%{inifile}
 
 install -m0755 modules/%{soname} %{buildroot}%{_libdir}/php/extensions/%{soname}
 
-install -d -m 755 %{buildroot}%{webappconfdir}
-cat > %{buildroot}%{webappconfdir}/%{name}.conf << EOF
+install -d -m 755 %{buildroot}%{_webappconfdir}
+cat > %{buildroot}%{_webappconfdir}/%{name}.conf << EOF
 Alias /%{name} /var/www/%{name}
 
 <Directory "/var/www/%{name}">
@@ -88,7 +88,6 @@ install -m0644 coverager/* %{buildroot}/var/www/%{name}/coverager
 %attr(0755,root,root) %{_libdir}/php/extensions/%{soname}
 
 %files admin
-%defattr(-,root,root)
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/httpd/conf/webapps.d/%{name}.conf
 /var/www/%{name}
 
