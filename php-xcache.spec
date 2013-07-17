@@ -6,7 +6,7 @@
 Summary:	The XCache module for PHP
 Name:		php-%{modname}
 Version:	2.0.1
-Release:	3
+Release:	4
 Group:		Development/PHP
 License:	BSD-like
 URL:		http://xcache.lighttpd.net/
@@ -73,7 +73,7 @@ cat > %{buildroot}%{webappconfdir}/%{name}.conf << EOF
 Alias /%{name} /var/www/%{name}
 
 <Directory "/var/www/%{name}">
-    Require host 127.0.0.1
+    Require host localhost.localdomain
     ErrorDocument 403 "Access denied per %{_sysconfdir}/httpd/conf/webapps.d/%{name}.conf"
 </Directory>
 EOF
@@ -83,7 +83,6 @@ install -m0644 coverager/* %{buildroot}/var/www/%{name}/coverager
 
 
 %files
-%defattr(-,root,root)
 %doc AUTHORS COPYING ChangeLog NEWS README THANKS
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/php.d/%{inifile}
 %attr(0755,root,root) %{_libdir}/php/extensions/%{soname}
