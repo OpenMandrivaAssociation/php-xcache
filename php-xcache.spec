@@ -6,7 +6,7 @@
 Summary:	The XCache module for PHP
 Name:		php-%{modname}
 Version:	2.0.1
-Release:	5
+Release:	6
 Group:		Development/PHP
 License:	BSD-like
 URL:		http://xcache.lighttpd.net/
@@ -14,7 +14,6 @@ Source0:	http://xcache.lighttpd.net/pub/Releases/%{version}/%{modname}-%{version
 Source1:	xcache.ini
 BuildRequires:  php-devel >= 3:5.2.0
 Conflicts:	php-afterburner php-mmcache php-eaccelerator php-apc
-Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 XCache is a fast, stable PHP opcode cacher that has been tested and is now
@@ -73,7 +72,7 @@ cat > %{buildroot}%{_webappconfdir}/%{name}.conf << EOF
 Alias /%{name} /var/www/%{name}
 
 <Directory "/var/www/%{name}">
-    Require host localhost.localdomain
+    Require local granted
     ErrorDocument 403 "Access denied per %{_sysconfdir}/httpd/conf/webapps.d/%{name}.conf"
 </Directory>
 EOF
