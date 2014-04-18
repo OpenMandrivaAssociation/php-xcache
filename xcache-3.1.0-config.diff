@@ -1,0 +1,57 @@
+diff -Naur xcache-3.1.0/htdocs/cacher/config.example.php xcache-3.1.0.oden/htdocs/cacher/config.example.php
+--- xcache-3.1.0/htdocs/cacher/config.example.php	2013-04-16 13:59:42.000000000 +0200
++++ xcache-3.1.0.oden/htdocs/cacher/config.example.php	2013-06-13 11:56:20.465899080 +0200
+@@ -5,10 +5,10 @@
+ // 1. copy config.example.php config.php; edit config.php
+ // 2. upgrading your config.php when config.example.php were upgraded
+ // XCache will load
+-// 1. ../config.default.php
+-// 2. ./config.default.php
+-// 3. ../config.php
+-// 4. ./config.php
++// 1. /usr/share/php-xcache/config.default.php
++// 2. /usr/share/php-xcache/cacher/config.default.php
++// 3. /etc/php-xcache/config.php
++// 4. /etc/php-xcache/cacher/config.php
+ 
+ // width of graph for free or usage blocks
+ $config['percent_graph_width'] = 120;
+diff -Naur xcache-3.1.0/htdocs/common/common.php xcache-3.1.0.oden/htdocs/common/common.php
+--- xcache-3.1.0/htdocs/common/common.php	2013-04-16 13:59:42.000000000 +0200
++++ xcache-3.1.0.oden/htdocs/common/common.php	2013-06-13 11:56:20.465899080 +0200
+@@ -252,11 +252,13 @@
+ 	include "./config.default.php";
+ }
+ include "../config.default.php";
+-if (file_exists("../config.php")) {
+-	include "../config.php";
++
++$mod=basename(getcwd());
++if (file_exists("/etc/php-xcache/config.php")) {
++	include "/etc/php-xcache/config.php";
+ }
+-if (file_exists("./config.php")) {
+-	include "./config.php";
++if (file_exists("/etc/php-xcache/$mod/config.php")) {
++	include "/etc/php-xcache/$mod/config.php";
+ }
+ 
+ $strings = array();
+diff -Naur xcache-3.1.0/htdocs/coverager/config.example.php xcache-3.1.0.oden/htdocs/coverager/config.example.php
+--- xcache-3.1.0/htdocs/coverager/config.example.php	2013-04-16 13:59:42.000000000 +0200
++++ xcache-3.1.0.oden/htdocs/coverager/config.example.php	2013-06-13 11:56:20.465899080 +0200
+@@ -5,10 +5,10 @@
+ // 1. copy config.example.php config.php; edit config.php
+ // 2. upgrading your config.php when config.example.php were upgraded
+ // XCache will load
+-// 1. ../config.default.php
+-// 2. ./config.default.php
+-// 3. ../config.php
+-// 4. ./config.php
++// 1. /usr/share/php-xcache/config.default.php
++// 2. /usr/share/php-xcache/coverager/config.default.php
++// 3. /etc/php-xcache/config.php
++// 4. /etc/php-xcache/coverager/config.php
+ 
+ // $config['include_paths'] = array("/www/my-php-project/");
+ // $config['exclude_paths'] = array("/www/my-php-project/tmp/");
