@@ -6,7 +6,7 @@
 Summary:	The XCache module for PHP
 Name:		php-%{modname}
 Version:	3.1.0
-Release:	6
+Release:	7
 Group:		Development/PHP
 License:	BSD-like
 URL:		http://xcache.lighttpd.net/
