@@ -9,7 +9,7 @@ Version:	3.1.0
 Release:	7
 Group:		Development/PHP
 License:	BSD-like
-URL:		http://xcache.lighttpd.net/
+URL:		https://xcache.lighttpd.net/
 Source0:	http://xcache.lighttpd.net/pub/Releases/%{version}/%{modname}-%{version}.tar.gz
 Source1:	xcache.ini
 Patch0:         xcache-3.1.0-config.diff
