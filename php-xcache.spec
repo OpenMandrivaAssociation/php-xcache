@@ -13,6 +13,11 @@ URL:		https://xcache.lighttpd.net/
 Source0:	http://xcache.lighttpd.net/pub/Releases/%{version}/%{modname}-%{version}.tar.gz
 Source1:	xcache.ini
 Patch0:         xcache-3.1.0-config.diff
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:  php-devel >= 3:5.2.0
 Conflicts:	php-afterburner php-mmcache php-eaccelerator php-apc
 
